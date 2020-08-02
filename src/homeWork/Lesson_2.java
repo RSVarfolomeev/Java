@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Lesson_2 {
 
-    public static int[] method_1(int[] a) {
+    public static void method_1(int[] a) {
         for (int i = 0; i < a.length; i++) {
             switch (a[i]) {
                 case 0:
@@ -17,24 +17,21 @@ public class Lesson_2 {
                     System.out.println("Ни один из case не сработал");
             }
         }
-        return a;
     }
 
-    public static int[] method_2(int[] a) {
+    public static void method_2(int[] a) {
         a[0] = 1;
         for (int i = 1; i < a.length; i++) {
             a[i] = a[i - 1] + 3;
         }
-        return a;
     }
 
-    public static int[] method_3(int[] a) {
+    public static void method_3(int[] a) {
         for (int i = 0; i < a.length; i++) {
             if (a[i] < 6) {
                 a[i] = a[i] * 2;
             }
         }
-        return a;
     }
 
     public static int method_4max(int[] a) {
@@ -57,12 +54,11 @@ public class Lesson_2 {
         return min;
     }
 
-    public static int[][] method_5(int[][] a) {
+    public static void method_5(int[][] a) {
         for (int i = 0; i < a.length; i++) {
             a[i][i] = 1;
             a[a.length - 1 - i][i] = 1;
         }
-        return a;
     }
 
     public static boolean method_6(int[] a) {
@@ -109,16 +105,16 @@ public class Lesson_2 {
 
     public static void main(String[] args) {
         int[] arr = {0, 1, 1, 0, 0, 1};
-        int[] arrPrint = method_1(arr);
-        System.out.println(Arrays.toString(arrPrint));
+        method_1(arr);
+        System.out.println(Arrays.toString(arr));
 
         int[] arr2 = new int[8];
-        int[] arr2Print = method_2(arr2);
-        System.out.println(Arrays.toString(arr2Print));
+        method_2(arr2);
+        System.out.println(Arrays.toString(arr2));
 
         int[] arr3 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-        int[] arr3Print = method_3(arr3);
-        System.out.println(Arrays.toString(arr3Print));
+        method_3(arr3);
+        System.out.println(Arrays.toString(arr3));
 
         int[] arr4 = {1, 5, 3, 2, 11, 4};
         int arr4MaxPrint = method_4max(arr4);
@@ -127,9 +123,9 @@ public class Lesson_2 {
         System.out.println("Минимальное значение элемента массива в 4-м задании - " + arr4MinPrint);
 
         int[][] arr5 = new int[4][4];
-        int[][] arr5Print = method_5(arr5);
-        for (int i = 0; i < arr5Print.length; i++) {
-            System.out.println(Arrays.toString(arr5Print[i]));
+        method_5(arr5);
+        for (int i = 0; i < arr5.length; i++) {
+            System.out.println(Arrays.toString(arr5[i]));
         }
 
         int[] arr6 = {1, 8, 5, 3, 1, 11, 7};
