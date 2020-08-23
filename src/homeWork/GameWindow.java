@@ -6,10 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameWindow extends JFrame {
-    protected static final int WIN_WIDTH = 512;
-    protected static final int WIN_HEIGHT = 300;
-    private static final int WIN_POSX = 256;
-    private static final int WIN_POSY = 150;
+    private static final int WIN_WIDTH = 507;
+    private static final int WIN_HEIGHT = 555;
+    private static final int WIN_POSX = 650;
+    private static final int WIN_POSY = 250;
     private Map map;
     private SettingsWindow settings;
 
