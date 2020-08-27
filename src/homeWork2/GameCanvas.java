@@ -33,6 +33,7 @@ public class GameCanvas extends JPanel {
                 b.getColorZ()  //blue
         );
         setBackground(color);
+
         controller.onDrawFrame(this, g, deltaTime);
         lastFrameTime = currentTime;
         try {
