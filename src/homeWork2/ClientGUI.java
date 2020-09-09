@@ -71,6 +71,7 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
         add(panelBottom, BorderLayout.SOUTH);
 
         btnSend.addActionListener(this);
+        tfMessage.addActionListener(this); //добавление кнопки ENTER (внезапно)
 
         setVisible(true);
     }
@@ -80,13 +81,13 @@ public class ClientGUI extends JFrame implements ActionListener, Thread.Uncaught
         Object src = e.getSource();
         if (src == cbAlwaysOnTop) {
             setAlwaysOnTop(cbAlwaysOnTop.isSelected());
-        } else if (src == btnSend) {
+        } else if (src == btnSend || src == tfMessage) { // "|| src == tfMessage" - добавление кнопки ENTER
             log.append(tfMessage.getText() + "\n");
             try {
                 PrintStream ps = new PrintStream(new FileOutputStream("log.txt", true));
                 ps.println(tfMessage.getText());
-            ps.flush();
-            ps.close();
+                ps.flush();
+                ps.close();
             } catch (FileNotFoundException e1) {
                 e1.printStackTrace();
             } catch (IOException exception) {
