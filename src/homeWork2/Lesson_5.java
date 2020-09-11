@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Lesson_5 {
 
-    static void method_1(){
+    static float method_1() {
         final int size = 10000000;
         float[] arr = new float[size];
         for (int i = 0; i < arr.length; i++) {
@@ -12,15 +12,22 @@ public class Lesson_5 {
         }
         long a = System.currentTimeMillis();
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+            arr[i] = (float) (arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
         }
         System.currentTimeMillis();
+
+        float sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
         System.out.println("\nМетод №1 (однопоточный):\na = " + a + " мс");
         System.out.println("System.currentTimeMillis() = " + System.currentTimeMillis() + " мс");
         System.out.println("Разница = " + (System.currentTimeMillis() - a) + " мс");
+        System.out.println(sum);
+        return sum;
     }
 
-    static void method_2(){
+    static float method_2() {
         final int size = 10000000;
         final int h = size / 2;
         float[] arr = new float[size];
@@ -39,7 +46,7 @@ public class Lesson_5 {
             @Override
             public void run() {
                 for (int i = 0; i < a1.length; i++) {
-                    a1[i] = (float)(a1[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+                    a1[i] = (float) (a1[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
                 }
             }
         };
@@ -47,7 +54,7 @@ public class Lesson_5 {
             @Override
             public void run() {
                 for (int i = 0; i < a2.length; i++) {
-                    a2[i] = (float)(a2[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+                    a2[i] = (float) (a2[i] * Math.sin(0.2f + (i + h) / 5) * Math.cos(0.2f + (i + h) / 5) * Math.cos(0.4f + (i + h) / 2));
                 }
             }
         };
@@ -57,11 +64,6 @@ public class Lesson_5 {
 
         try {
             r1.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        try {
             r2.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -70,14 +72,22 @@ public class Lesson_5 {
         System.arraycopy(a1, 0, arr, 0, h);
         System.arraycopy(a2, 0, arr, h, h);
 
+        float sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+
         System.currentTimeMillis();
         System.out.println("\nМетод №2 (двухпоточный):\na = " + a + " мс");
         System.out.println("System.currentTimeMillis() = " + System.currentTimeMillis() + " мс");
         System.out.println("Разница = " + (System.currentTimeMillis() - a) + " мс");
+        System.out.println(sum);
+        return sum;
     }
 
     public static void main(String[] args) {
-        method_1();
-        method_2();
+        float m1 = method_1();
+        float m2 = method_2();
+        System.out.println(m1 == m2);
     }
 }
